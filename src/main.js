@@ -10,6 +10,9 @@ class ExObjectionQueryBuilder extends QueryBuilder {
    * @param {{ ignoreAccent?: boolean, ignoreMask?: boolean, ignoreCase?: boolean }} options set of configurations for filter
    */
   whereLike(columns = [], value, options = {}) {
+    if (columns.length == 0 || !value)
+      return this;
+
     options = Object.assign({
       ignoreAccent: true,
       ignoreMask: true,
