@@ -3,6 +3,32 @@
 An extended query builder for Objection.js.  
 This package adds extra methods to the Objection.js query builder.
 
+## Installation
+
+```
+npm install ex-objection-query-builder
+```
+or
+```
+yarn add ex-objection-query-builder
+```
+
+## How to use
+
+Just require the package in your model and then override the `QueryBuilder` method.  
+Example:
+
+```javascript
+const { Model } = require('objection');
+const { ExObjectionQueryBuilder } = require('ex-objection-query-builder');
+
+class User extends Model {
+  static get QueryBuilder() {
+    return ExObjectionQueryBuilder;
+  }
+}
+```
+
 ## Methods
 
 All the available methods are listed below
