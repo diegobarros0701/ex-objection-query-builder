@@ -7,16 +7,32 @@ This package adds extra methods to the Objection.js query builder.
 
 All the available methods are listed below
 
-### # whereLike(columns = [], value)
+### # whereLike(columns = [], value, options = {})
 
 Search for results that **contains** the specified value at the specifieds columns.  
+
+| Parameter | Type | Default | Description |
+| -- | -- | -- | -- |
+| `columns` | `string[]` | `[]` | An array containing the columns to filter  |
+| `value` | `string` | `undefined` | The value to filter |
+| `options` | `object` | `{}` | A set of configurations for the filter (see [options object](#options-object)) |
+
+#### # options object
+
+| Property | Type | Default | Description |
+| -- | -- | -- | -- |
+| `ignoreAccent` | `boolean` | `true` | Ignore words accents |
+| `ignoreCase` | `boolean` | `true` | Ignore words case |
+| `ignoreMask` | `boolean` | `true` | Remove any mask (`-.,()/\[]`) of the informed value |
 
 
 **Important:**  
 
-Working only with postgres because of the use of `unaccent`function.  
+The `ignoreAccent` is working only with postgres because of the use of `unaccent`function.  
 To use it you need to activate this function. For that just ran the following:
 
 ```
 CREATE EXTENSION unaccent;
-```
+```  
+  
+The `ignoreCase` also works only with postgres because of the operator `ILIKE`
