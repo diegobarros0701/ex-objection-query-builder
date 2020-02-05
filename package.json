@@ -1,6 +1,6 @@
 {
   "name": "ex-objection-query-builder",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An extended query builder for Objection.js",
   "main": "index.js",
   "author": {
