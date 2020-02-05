@@ -1,20 +1,50 @@
 const { QueryBuilder } = require('objection');
 
 class ExObjectionQueryBuilder extends QueryBuilder {
-  whereLike(columns = [], value) {
+
+  /**
+   * Filter the specified columns for the given value
+   * 
+   * @param {string[]} columns array of columns to filter
+   * @param {string} value value to filter the columns
+   * @param {{ ignoreAccent?: boolean, ignoreMask?: boolean, ignoreCase?: boolean }} options set of configurations for filter
+   */
+  whereLike(columns = [], value, options = {}) {
+    options = Object.assign({
+      ignoreAccent: true,
+      ignoreMask: true,
+      ignoreCase: true
+    }, options);
+
+    let operator = options.ignoreCase ? 'ilike' : 'like';
+    let rawQuery = '';
+
+    if (options.ignoreMask) {
+      value = removeMask(value);
+    }
 
     this.where(function () {
       columns.forEach((column, index) => {
-        if (index == 0) {
-          this.whereRaw('unaccent(' + column + '::text) ilike unaccent(?)', '%' + value + '%');
+        if (options.ignoreAccent) {
+          rawQuery = `unaccent(${column}::text) ${operator} unaccent(?)`;
         } else {
-          this.orWhereRaw('unaccent(' + column + '::text) ilike unaccent(?)', '%' + value + '%');
+          rawQuery = `${column}::text ${operator} ?`;
+        }
+
+        if (index == 0) {
+          this.whereRaw(rawQuery, '%' + value + '%');
+        } else {
+          this.orWhereRaw(rawQuery, '%' + value + '%');
         }
       });
     });
 
     return this;
   }
+}
+
+function removeMask(text) {
+  return text.replace(/[-.,()\/\\\[\]]/, '');
 }
 
 module.exports = { ExObjectionQueryBuilder };

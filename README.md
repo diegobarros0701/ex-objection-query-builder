@@ -1,10 +1,13 @@
 # Extended Objection Query Builder
 
-An extended query builder for Objection.js
+An extended query builder for Objection.js.  
+This package adds extra methods to the Objection.js query builder.
 
-# Methods
+## Methods
 
-## whereLike(columns = [], value)
+All the available methods are listed below
+
+### # whereLike(columns = [], value)
 
 Search for results that **contains** the specified value at the specifieds columns.  
 
