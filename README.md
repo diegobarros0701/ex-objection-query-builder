@@ -8,12 +8,11 @@ An extended query builder for Objection.js
 
 Search for results that **contains** the specified value at the specifieds columns.  
 
-```
-Important:  
 
-Working only with postgres because of the use o `unaccent`function.  
-To use it you need to activate this is the `unaccent`. For this just ran the following:
-``'
+**Important:**  
+
+Working only with postgres because of the use of `unaccent`function.  
+To use it you need to activate this function. For that just ran the following:
 
 ```
 CREATE EXTENSION unaccent;
