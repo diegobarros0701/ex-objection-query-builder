@@ -1,1 +1,5 @@
-module.exports = require('./src/main');
+const { ExObjectionQueryBuilder } = require('./src/main');
+
+module.exports = {
+  ExObjectionQueryBuilder
+}
